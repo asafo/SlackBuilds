@@ -10,3 +10,4 @@ python-evas:         Python bindings for evas
 python-evas:
 python-evas: evas is part of the enlightenment (dr17) window manager 
 python-evas:
+python-evas:
