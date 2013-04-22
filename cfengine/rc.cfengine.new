@@ -1,0 +1,83 @@
+#!/bin/bash
+
+# CFEngine startup script for Slackware Linux
+# Copyright 2013 Asaf Ohaion <asaf _at_ hadasa-oss.net>
+# Licensed under GNU GPL v2
+
+RUN_CF_SERVERD=1
+RUN_CF_EXECD=1
+RUN_CF_MONITORD=1
+
+CFEXECD=/var/cfengine/bin/cf-execd
+CFSERVD=/var/cfengine/bin/cf-serverd
+CFENVD=/var/cfengine/bin/cf-monitord
+
+# Return values (according to LSB):
+# 0 - success
+# 1 - generic or unspecified error
+# 2 - invalid or excess argument(s)
+# 3 - unimplemented feature (e.g. "reload")
+# 4 - insufficient privilege
+# 5 - program is not installed
+# 6 - program is not configured
+# 7 - program is not running
+
+start() {
+		echo "Starting CFEngine"
+		case "$RUN_CF_MONITORD $RUN_CF_EXECD $RUN_CF_SERVERD" in
+		    *1*) ;;
+		    *) exit 0;;
+		esac
+
+		if [ "$RUN_CF_MONITORD" = "1" ]; then
+		    "$CFENVD"
+		fi
+		if [ "$RUN_CF_EXECD" = "1" ]; then
+		    "$CFEXECD"
+		fi
+		if [ "$RUN_CF_SERVERD" = "1" ]; then
+		    "$CFSERVD"
+		fi
+		return 0
+}
+
+stop() {
+    echo "Shutting down CFEngine..."
+    case "$RUN_CF_MONITORD $RUN_CF_EXECD $RUN_CF_SERVERD" in
+	*1*) ;;
+	*) exit 0;;
+    esac
+    
+    if [ "$RUN_CF_MONITORD" = "1" ]; then
+	killall "$CFENVD"
+    fi
+    if [ "$RUN_CF_EXECD" = "1" ]; then
+    	killall "$CFEXECD"
+    fi
+    if [ "$RUN_CF_SERVERD" = "1" ]; then
+	killall "$CFSERVD"
+    fi
+    return 0
+}
+
+
+case "$1" in
+
+	"start")
+	start
+	exit $?
+	;;
+	"stop")
+	stop
+	exit $?
+	;;
+	"restart")
+	stop
+	start
+	exit $?
+	;;
+	*)	
+		echo "Usage: $0 {start|stop|restart}"
+		exit 1
+	;;
+esac	

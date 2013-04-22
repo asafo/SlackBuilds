@@ -1,0 +1,28 @@
+# HOW TO EDIT THIS FILE:
+# The "handy ruler" below makes it easier to edit a package description.  Line
+# up the first '|' above the ':' following the base package name, and the '|'
+# on the right side marks the last column you can put a character in.  You must
+# make exactly 11 lines for the formatting to be correct.  It's also
+# customary to leave one space after the ':'.
+
+        |-----handy-ruler------------------------------------------------------|
+cfengine: cfengine 
+cfengine:
+cfengine: Built upon well-established theory and high-quality engineering   
+cfengine: practices, CFEngine has enjoyed an outstanding security record over 
+cfengine: its 19-year history. 
+cfengine:
+cfengine: CFEngine solutions are highly scalable through decentralized, 
+cfengine: autonomous agents that can continuously monitor, self-repair, and 
+cfengine: update a global multi-site enterprise every five minutes -- 
+cfengine: with negligible impact on system resources or performance.
+cfengine:
+cfengine: CFEngine Community is licensed under the Gnu General Public License 
+cfengine: GPL, version 3 and available as a free-of charge download or in 
+cfengine: source form
+cfengine:
+cfengine: https://cfengine.com/community
+cfengine:
+
+
+
